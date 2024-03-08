@@ -1,0 +1,20 @@
+<div class="box is-section mx-6 my-3">
+  <div class="is-flex is-justify-content-center">
+    <a href="{% url 'linkspage' %}" class="button mx-2">
+      <i class="bi bi-share mx-2"></i>
+      {% if LANGUAGE_CODE == 'en' %}
+      Links
+      {% else %}
+      الروابط
+      {% endif %}
+    </a>
+    <a href="{% url 'homepage' %}" class="button mx-2">
+      <i class="bi bi-megaphone mx-2"></i>
+      {% if LANGUAGE_CODE == 'en' %}
+      Ads
+      {% else %}
+      الأعلانات
+      {% endif %}
+    </a>
+  </div>
+</div>

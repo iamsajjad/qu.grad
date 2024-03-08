@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include './includes/head.html' %}
+    <title>UoQ | CV project</title>
+  </head>
+
+  <body>
+
+    {% include 'includes/header.html' %}
+
+    <div class="box is-section mx-6 my-3">
+      <div class="m-3 p-3" style="border-radius: 10px">
+        <p class="is-size-3 is-title ">{{ post.title }}</p>
+        <p class=""><span class="">{{ post.create_date }}</span> | <span class="tag is-primary">Post Number : {{ post.id }}</span></p>
+        <div class="is-flex is-links-container is-align-items-center is-full-width">
+          <div class="is-right-border"></div>
+          <div  class="is-main " style=" overflow-x: auto;">
+            <p class="">{{ post.text }}</p>
+          </div>
+        </div>
+      </div>
+      </a>
+    </div>
+
+    {% include 'includes/footer.html' %}
+
+  </body>
+  <script src="{% static 'js/main.js' %}"></script>
+</html>
