@@ -1,0 +1,67 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include './includes/head.html' %}
+    <title>UoQ | Graduates Platform</title>
+  </head>
+
+  <body>
+
+    {% include 'includes/header.html' %}
+
+    {% include 'includes/logo.html' %}
+
+    {% include 'includes/nav.html' %}
+
+    <div class="box is-section mx-6 my-3">
+
+      <div class="is-flex is-links-container is-align-items-center is-justify-content-right is-full-width">
+        <div class="is-right-border"></div>
+        <div  class="is-main pt-2 ml-2 is-underlined" style=" overflow-x: auto;">
+          <a target="_blank" href="https://www.cabinet.iq/ar">الأمانة العامة لمجلس الوزراء</a>
+        </div>
+        <i class="bi bi-link" style="font-size: 50px"></i>
+      </div>
+
+      <div class="is-flex is-links-container is-align-items-center is-justify-content-right is-full-width">
+        <div class="is-right-border"></div>
+        <div  class="is-main pt-2 ml-2 is-underlined" style=" overflow-x: auto;">
+          <a target="_blank" href="https://mohesr.gov.iq/ar/">وزارة التلعليم العالي والبحث العلمي</a>
+        </div>
+        <i class="bi bi-link" style="font-size: 50px"></i>
+      </div>
+
+      <div class="is-flex is-links-container is-align-items-center is-justify-content-right is-full-width">
+        <div class="is-right-border"></div>
+        <div  class="is-main pt-2 ml-2 is-underlined" style=" overflow-x: auto;">
+          <a target="_blank" href="https://portal.scrd-gate.gov.iq/">بوابة دائرة البعثات والعلاقات الثقافية</a>
+        </div>
+        <i class="bi bi-link" style="font-size: 50px"></i>
+      </div>
+
+      <div class="is-flex is-links-container is-align-items-center is-justify-content-right is-full-width">
+        <div class="is-right-border"></div>
+        <div  class="is-main pt-2 ml-2 is-underlined" style=" overflow-x: auto;">
+          <a target="_blank" href="https://iraqi-fpsc.gov.iq/">مجلس الخدمة العام الأتحادي</a>
+        </div>
+        <i class="bi bi-link" style="font-size: 50px"></i>
+      </div>
+
+      <div class="is-flex is-links-container is-align-items-center is-justify-content-right is-full-width">
+        <div class="is-right-border"></div>
+        <div  class="is-main pt-2 ml-2 is-underlined" style=" overflow-x: auto;">
+          <a target="_blank" href="https://riyada.iq/ar">مبادرة ريادة</a>
+        </div>
+        <i class="bi bi-link" style="font-size: 50px"></i>
+      </div>
+
+    </div>
+
+    {% include 'includes/footer.html' %}
+
+  </body>
+  <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</html>

@@ -1,0 +1,102 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include './includes/head.html' %}
+    <title>UoQ | Graduates Platform</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+
+  <body>
+
+    {% include './includes/header.html' %}
+    {% include './includes/sidebar.html' %}
+    {% include './includes/logo.html' %}
+
+    {% if request.user.is_superuser %}
+    <div class="box is-section mx-6 my-3">
+      {% if LANGUAGE_CODE == 'en' %}
+      <h1 class="is-main is-font-md p-3">Create New Post</h1>
+      {% else %}
+      <h1 class="is-main  is-font-md p-3">أنشاء منشور جديد</h1>
+      {% endif %}
+      <div class="is-flex is-justify-content-start">
+        <form class="is-flex is-flex-direction-column m-3 is-full-width" action="{% url 'post' %}" method="post"> {% csrf_token %}
+          <input class="input   my-1" type="text" name="title" type="text" autofocus
+            {% if LANGUAGE_CODE == 'en' %}
+            placeholder="Post Title Here"
+            {% else %}
+            placeholder="عنوان المنشور هنا"
+            {% endif %}
+          />
+          <textarea class="textarea" name="text"
+            {% if LANGUAGE_CODE == 'en' %}
+            placeholder="Post Text Here"
+            {% else %}
+            placeholder="نص المنشور هنا"
+            {% endif %}
+            ></textarea>
+          <input class="button my-3" type="submit"
+            {% if LANGUAGE_CODE == 'en' %}
+            value="Post"
+            {% else %}
+            value="نشر الأن"
+            {% endif %}
+          >
+        </form>
+      </div>
+    </div>
+    {% endif %}
+
+    {% include 'includes/nav.html' %}
+
+    {% if posts %}
+
+      {% for post in posts %}
+      <div class="box is-section mx-6 my-3">
+        {% if LANGUAGE_CODE == 'en' %}
+        <a target="_blank" href="/en/post/{{ post.id }}">
+        {% else %}
+        <a target="_blank" href="/ar/post/{{ post.id }}" style="direction:rtl">
+        {% endif %}
+            <div class="m-3 p-3" style="border-radius: 10px">
+              <p class="is-size-3 is-title ">{{ post.title }}</p>
+              <p class=""><span class="">{{ post.create_date }}</span> | <span class="tag is-primary">Post Number : {{ post.id }}</span></p>
+              <div class="is-flex is-links-container is-align-items-center justify-content-center is-full-width">
+                <div class="is-right-border"></div>
+                <div  class="is-main " style=" overflow-x: auto;">
+                  <p class="is-size-5">{{ post.text }}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <div>
+            <div>
+              <div class="is-flex is-justify-content-space-around is-flex-direction-row is-full-width">
+                <div class="" id="postqrcode"></div>
+              </div>
+            </div>
+            <script type="text/javascript">
+              var enqrcode = new QRCode(document.getElementById("postqrcode"), {
+                text: "https://grad.qu.edu.iq/ar/post/{{ post.id }}",
+                width: 128,
+                height: 128,
+                colorDark : "#408b8a",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+              });
+            </script>
+          </div>
+      </div>
+      {% endfor %}
+
+    {% endif %}
+
+    {% include 'includes/footer.html' %}
+
+  </body>
+  <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</html>

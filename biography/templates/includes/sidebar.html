@@ -1,0 +1,145 @@
+{% load i18n %}
+{% load static %}
+{% load humanize %}
+{% load switchlang %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    {% if not request.user.is_anonymous %}
+    <li class="nav-item">
+      <span class="nav-link collapsed">
+        <i class="bi bi-person"></i>
+        <span>{{ request.user.email }}</span>
+      <span>
+    </li>
+    {% endif %}
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{{ request.path|switchlang }}">
+        <i class="bi bi-translate"></i>
+        {% if LANGUAGE_CODE == 'en' %}
+        <span>العربية</span>
+        {% else %}
+        <span>English</span>
+        {% endif %}
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'homepage' %}">
+        <i class="bi bi-house"></i>
+        {% if LANGUAGE_CODE == 'en' %}
+        <span>Home</span>
+        {% else %}
+        <span>الصفحة الرئيسية</span>
+        {% endif %}
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'graduates' %}">
+        <i class="bi bi-people"></i>
+        {% if LANGUAGE_CODE == 'en' %}
+        <span>Graduates</span>
+        {% else %}
+        <span>الخريجيين</span>
+        {% endif %}
+
+      </a>
+    </li>
+
+    {% if not request.user.is_anonymous %}
+    {% if request.user == bio.owner or request.user.is_superuser %}
+    {% if biopage %}
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'edit' slug=settings.slug %}">
+        <i class="bi bi-pencil-square"></i>
+        {% if LANGUAGE_CODE == 'en' %}
+        <span>Edit Profile</span>
+        {% else %}
+        <span>تحرير الصفحة الشخصية</span>
+        {% endif %}
+      </a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'biopage' slug=settings.slug %}">
+        <i class="bi bi-eye"></i>
+        {% if LANGUAGE_CODE == 'en' %}
+        <span>View Profile</span>
+        {% else %}
+        <span>الصفحة الشخصية</span>
+        {% endif %}
+      </a>
+    </li>
+    {% endif %}
+
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'biopage' slug=settings.slug %}">
+        <i class="bi bi-eye"></i>
+        {% if LANGUAGE_CODE == 'en' %}
+        <span>View Biography</span>
+        {% else %}
+        <span>معاينة السيرة الذاتية</span>
+        {% endif %}
+      </a>
+    </li>
+    {% endif %}
+
+    {% endif %}
+
+    {% if not request.user.is_anonymous %}
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'settings' %}">
+        <i class="bi bi-gear"></i>
+        {% if LANGUAGE_CODE == 'en' %}
+        <span>Settings</span>
+        {% else %}
+        <span>الأعدادات</span>
+        {% endif %}
+      </a>
+    </li>
+    {% endif %}
+
+    {% if request.user.is_anonymous %}
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'register' %}">
+        <i class="bi bi-person"></i>
+        {% if LANGUAGE_CODE == 'en' %}
+        <span>Create Account</span>
+        {% else %}
+        <span>أنشاء حساب</span>
+        {% endif %}
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'signin' %}">
+        <i class="bi bi-box-arrow-in-right"></i>
+        {% if LANGUAGE_CODE == 'en' %}
+        <span>Log in</span>
+        {% else %}
+        <span>تسجيل الدخول</span>
+        {% endif %}
+      </a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'signout' %}">
+        <i class="bi bi-box-arrow-right"></i>
+        {% if LANGUAGE_CODE == 'en' %}
+        <span>Log out</span>
+        {% else %}
+        <span>تسجيل الخروج</span>
+        {% endif %}
+      </a>
+    </li>
+    {% endif %}
+
+  </ul>
+
+</aside>

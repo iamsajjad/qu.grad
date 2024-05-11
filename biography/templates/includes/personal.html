@@ -1,0 +1,196 @@
+{% load i18n %}
+{% load static %}
+<div class="personal-img mx-6 my-4">
+  <section class="is-flex is-justify-content-center is-mobile">
+    <div style="width: auto; position: relative">
+      <div class="is-white-bg p-1 is-rounded button is-avatar is-hidden-overflow">
+        <img class="image" src="{{ bio.image.url }}" alt="{{ bio.full_name }}">
+      </div>
+      {% if bio.full_name %}
+        {% if LANGUAGE_CODE == 'en' %}
+        <p class="my-3 is-white is-font-md">{% if bio.academic_title %}<span class="tag is-primary is-light is-medium"> {{ bio.academic_title }}</span>{% endif %} {{ bio.full_name }}</p>
+        {% else %}
+        <p class="my-3 is-white is-font-md ">{{ bio.ar_full_name }} {% if bio.ar_academic_title %}<span class="tag is-primary is-light is-medium ">{{ bio.ar_academic_title }}</span>{% endif %}</p>
+        {% endif %}
+      {% endif %}
+    </div>
+  </section>
+</div>
+
+{% if bio.full_name %}
+{% if LANGUAGE_CODE == 'en' %}
+<div class="box is-section mx-6 my-4" id="main">
+{% else %}
+<div class="box is-section mx-6 my-4" id="main" style="direction:rtl">
+{% endif %}
+    <section class="is-flex is-justify-content-center is-mobile">
+      <div>
+        <!-- birthday icon -->
+        <span class="icon-text m-2">
+          <i class="bi bi-balloon-fill is-icon"></i>
+          <span class="is-main">{{ bio.birthday|date:"Y" }}</span>
+        </span>
+        <!-- gender icon -->
+        <span class="icon-text m-2">
+          {% if LANGUAGE_CODE == 'en' %}
+            {% if bio.gender == 'Male' %}
+            <i class="bi bi-gender-male is-icon"></i>
+            {% else %}
+            <i class="bi bi-gender-female is-icon"></i>
+            {% endif %}
+            <span class="is-main">{{ bio.gender }}</span>
+          {% else %}
+            {% if bio.gender == 'Male' %}
+            <i class="bi bi-gender-male is-icon"></i>
+            <span class="is-main ">ذكر</span>
+            {% else %}
+            <i class="bi bi-gender-female is-icon"></i>
+            <span class="is-main ">أنثى</span>
+            {% endif %}
+          {% endif %}
+        </span>
+        <!-- location icon -->
+        <span class="icon-text m-2">
+          <i class="bi bi-globe is-icon"></i>
+          {% if LANGUAGE_CODE == 'en' %}
+          <span class="is-main">{{ bio.nationality }}</span>
+          {% else %}
+          <span class="is-main ">{{ bio.ar_nationality }}</span>
+          {% endif %}
+        </span>
+        <!-- graduation year icon -->
+        <span class="icon-text m-2">
+          <i class="bi bi-mortarboard-fill is-icon"></i>
+          {% if LANGUAGE_CODE == 'en' %}
+          <span class="is-main">{{ bio.degree }}</span>
+          {% else %}
+            {% if bio.degree == 'PhD' %}
+            <span class="is-main ">دكتوراه</span>
+            {% elif bio.degree == 'MSc' %}
+            <span class="is-main ">ماجستير</span>
+            {% elif bio.degree == 'Higher Diploma' %}
+            <span class="is-main ">دبلوم عالي</span>
+            {% else %}
+            <span class="is-main ">بكلوريوس</span>
+            {% endif %}
+          {% endif %}
+        </span>
+      </div>
+    </section>
+
+    <hr class="hr navbar-divider is-main-light-bg" />
+
+    {% if LANGUAGE_CODE == 'en' %}
+
+    <div class="is-flex is-justify-content-space-between is-flex-wrap-wrap">
+      <div class="is-flex is-flex-direction-column">
+        {% if bio.college %}
+        <div class="my-1 has-text-left">
+          <span class="is-main">College | Center : </span>
+          <span>{{ bio.college }}</span>
+        </div>
+        {% endif %}
+        {% if bio.department %}
+        <div class="my-1 has-text-left">
+          <span class="is-main"> Department : </span>
+          <span>{{ bio.department }}</span>
+        </div>
+        {% endif %}
+        {% if bio.grad_date %}
+        <div class="my-1 has-text-left">
+          <span class="is-main">Graduation Date : </span>
+          <span>{{ bio.grad_date|date:"Y" }}</span>
+        </div>
+        {% endif %}
+        {% if bio.mother_lang %}
+        <div class="my-1 has-text-left">
+          <span class="is-main">Mother Language : </span>
+          <span>{{ bio.mother_lang }}</span>
+        </div>
+        {% endif %}
+        {% if bio.other_langs %}
+        <div class="my-1 has-text-left">
+          <span class="is-main">Other Languages : </span>
+          <span>{{ bio.other_langs }}</span>
+        </div>
+        {% endif %}
+        {% if bio.phone %}
+        <div class="my-1 has-text-left">
+          <span class="is-main">Phone : </span>
+          <span><a href="tel:{{ bio.phone }}">{{ bio.phone }}</a></span>
+        </div>
+        {% endif %}
+        {% if bio.email %}
+        <div class="my-1 has-text-left">
+          <span class="is-main">Email : </span>
+          <span><a href="mailto:{{ bio.email }}">{{ bio.email }}</a></span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% else %}
+
+    <div class="is-flex is-justify-content-space-between is-flex-wrap-wrap">
+      <div class="is-flex is-flex-direction-column">
+        {% if bio.ar_college %}
+        <div class="my-1 has-text-right">
+          <span class="is-main ">الكلية | المركز : </span>
+          <span class="">{{ bio.ar_college }}</span>
+        </div>
+        {% endif %}
+        {% if bio.ar_department %}
+        <div class="my-1 has-text-right">
+          <span class="is-main ">القسم : </span>
+          <span class="">{{ bio.ar_department }}</span>
+        </div>
+        {% endif %}
+        {% if bio.grad_date %}
+        <div class="my-1 has-text-right">
+          <span class="is-main ">سنة التخرج : </span>
+          <span>{{ bio.grad_date|date:"Y" }}</span>
+        </div>
+        {% endif %}
+        {% if bio.ar_mother_lang %}
+        <div class="my-1 has-text-right">
+          <span class="is-main ">اللغة الأم :</span>
+          <span class="">{{ bio.ar_mother_lang }}</span>
+        </div>
+        {% endif %}
+        {% if bio.ar_other_langs %}
+        <div class="my-1 has-text-right">
+          <span class="is-main ">اللغات الأخرى :</span>
+          <span class="">{{ bio.ar_other_langs }}</span>
+        </div>
+        {% endif %}
+        {% if bio.ar_state %}
+        <div class="my-1 has-text-right">
+          <span class="is-main ">المحافظة : </span>
+          <span class="">{{ bio.ar_state }}</span>
+        </div>
+        {% endif %}
+        {% if bio.ar_district %}
+        <div class="my-1 has-text-right">
+          <span class="is-main ">القضاء : </span>
+          <span class="">{{ bio.ar_district }}</span>
+        </div>
+        {% endif %}
+        {% if bio.phone %}
+        <div class="my-1 has-text-right">
+          <span class="is-main ">الهاتف : </span>
+          <span><a href="tel:{{ bio.phone }}">{{ bio.phone }}</a></span>
+        </div>
+        {% endif %}
+        {% if bio.email %}
+        <div class="my-1 has-text-right">
+          <span class="is-main ">البريد الشخصي : </span>
+          <span><a href="mailto:{{ bio.email }}">{{ bio.email }}</a></span>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% endif %}
+
+  </div>
+{% endif %}

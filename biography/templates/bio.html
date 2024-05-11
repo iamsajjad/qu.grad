@@ -1,0 +1,94 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include './includes/head.html' %}
+    <title>{{ bio.full_name }}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    {% if LANGUAGE_CODE == 'en' %}
+    <meta property="og:site_name" content="University of Qadisiyah | Graduates Platform" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ bio.academic_title }} {{ bio.full_name }}" />
+    <meta property="og:image" content="https://grad.qu.edu.iq/{{ bio.image.url }}" />
+    <meta property="og:url" content="https://grad.qu.edu.iq/en/@/{{ bio.slug }}" />
+    <meta property="og:description" content="{{ bio.degree }} | {{ bio.birthday|date:"Y" }} | {{ bio.college }}" />
+    {% else %}
+    <meta property="og:site_name" content="جامعــــــــــة القـــــــادسيـــــــــة | منصة خريجي الجامعة" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ bio.ar_academic_title }} {{ bio.ar_full_name }}" />
+    <meta property="og:image" content="https://grad.qu.edu.iq/{{ bio.image.url }}" />
+    <meta property="og:url" content="https://grad.qu.edu.iq/ar/@/{{ bio.slug }}" />
+    <meta property="og:description" content="{{ bio.degree }} | {{ bio.birthday|date:"Y" }} | {{ bio.college }}" />
+    {% endif %}
+  </head>
+
+  <body>
+
+    {% include './includes/header.html' %}
+    {% include './includes/sidebar.html' %}
+    {% include './includes/personal.html' %}
+
+    <div class="box is-section mx-6 my-4">
+      <h1 class="is-main  is-font-md p-3">الرابط المباشر لهذه الصفحة</h1>
+      <div class="is-flex is-justify-content-start">
+        <div class="is-flex is-flex-direction-row m-3 is-full-width">
+          <input id="enurl" class=" input my-1" type="text" value="https://grad.qu.edu.iq/ar/@/{{ bio.slug }}" disabled />
+          <button class="btn btn-secondary" onclick="copy('https://grad.qu.edu.iq/ar/@/{{ bio.slug }}')"><i class="bi bi-clipboard" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="is-flex is-justify-content-space-around is-flex-direction-row is-full-width">
+        <div class="" id="arqrcode"></div>
+      </div>
+    </div>
+    <div class="box is-section mx-6 my-4">
+      <h1 class="is-main is-font-md p-3">Direct Link to this page</h1>
+      <div class="is-flex is-justify-content-start">
+        <div class="is-flex is-flex-direction-row m-3 is-full-width">
+          <input id="enurl" class=" input my-1" type="text" value="https://grad.qu.edu.iq/en/@/{{ bio.slug }}" disabled />
+          <button class="btn btn-secondary" onclick="copy('https://grad.qu.edu.iq/en/@/{{ bio.slug }}')"><i class="bi bi-clipboard" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="is-flex is-justify-content-space-around is-flex-direction-row is-full-width">
+        <div class="" id="enqrcode"></div>
+      </div>
+    </div>
+      <script type="text/javascript">
+        var enqrcode = new QRCode(document.getElementById("enqrcode"), {
+          text: "https://grad.qu.edu.iq/en/@/{{ bio.slug }}",
+          width: 128,
+          height: 128,
+          colorDark : "#408b8a",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.H
+        });
+
+        var arqrcode = new QRCode(document.getElementById("arqrcode"), {
+          text: "https://grad.qu.edu.iq/ar/@/{{ bio.slug }}",
+          width: 128,
+          height: 128,
+          colorDark : "#408b8a",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.H
+        });
+      </script>
+    </div>
+
+    {% if not bio.full_name %}
+
+    <div class="box p-6 m-6 ">
+      {% if LANGUAGE_CODE == 'en' %}
+        <p class="has-text-weight-semibold is-main m-6">Please complete profile setup</p><br>
+      {% else %}
+        <p class="has-text-weight-semibold is-main m-6 ">رجاءاً أكمل أعداد الملف الشخصي</p>
+      {% endif %}
+    </div>
+
+    {% endif %}
+
+    {% include './includes/footer.html' %}
+  </body>
+  <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</html>

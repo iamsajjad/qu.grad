@@ -1,0 +1,73 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include '../includes/head.html' %}
+    <title>UoQ | Graduates Platform</title>
+  </head>
+  <body>
+
+    {% include '../includes/header.html' %}
+    {% include '../includes/sidebar.html' %}
+    {% include '../includes/logo.html' %}
+
+    <div class="mt-6">
+      <div class="is-flex is-flex-direction-column is-align-items-center is-flex-wrap-wrap">
+        <form id="SigninForm" action="{% url 'signin' %}" method="post">{% csrf_token %}
+          <div class="box is-half-width is-flex is-flex-direction-column is-align-items-center">
+            <div class="is-flex is-flex-direction-column">
+              {% if LANGUAGE_CODE == 'en' %}
+              <p class="is-main my-2 is-font-sm">Email</p>
+              {% else %}
+              <p class="is-main my-2  is-font-sm">البريد الألكتروني</p>
+              {% endif %}
+              <input
+                class="reg-input input is-normal is-full-width"
+                type="text"
+                placeholder="example@qu.edu.iq"
+                name="email"
+              />
+            </div>
+            <div class="is-flex is-flex-direction-column my-3">
+              {% if LANGUAGE_CODE == 'en' %}
+              <p class="is-main my-2 is-font-sm">Password</p>
+              {% else %}
+              <p class="is-main my-2  is-font-sm">الرمز السري</p>
+              {% endif %}
+              <input class="reg-input input is-normal is-full-width" type="password" name="password" />
+            </div>
+            <div class="is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
+              <div>
+                <button class="button my-4 is-main-bg is-rounded is-white" type="submit" form="SigninForm">
+                  {% if LANGUAGE_CODE == 'en' %}
+                  Sign in
+                  {% else %}
+                  تسجيل الدخول
+                  {% endif %}
+                </button>
+              </div>
+            </div>
+          </div>
+          <a class="button my-4 is-main-bg is-rounded is-white" href="{% url 'register' %}">
+            {% if LANGUAGE_CODE == 'en' %}
+            Register
+            {% else %}
+            أنشاء حساب
+            {% endif %}
+          </a>
+          <a class="button my-4 is-main-bg is-rounded is-white" href="{% url 'reset' %}">
+            {% if LANGUAGE_CODE == 'en' %}
+            Forget Password !
+            {% else %}
+            ! نسيت كلمة السر
+            {% endif %}
+          </a>
+        </form>
+      </div>
+    </div>
+    {% include '../includes/footer.html' %}
+  </body>
+  <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</html>

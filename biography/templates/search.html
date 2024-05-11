@@ -1,0 +1,153 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include './includes/head.html' %}
+    <title>UoQ | Graduates Platform</title>
+  </head>
+
+  <body>
+
+    {% include 'includes/header.html' %}
+    {% include 'includes/sidebar.html' %}
+    {% include 'includes/logo.html' %}
+
+    <div class="box is-section mx-6 my-3">
+      <form method="get" id="searchForm">
+        {% if LANGUAGE_CODE == 'en' %}
+        <div class="is-flex is-justify-content-center is-align-items-center">
+          <div class="container columns is-full-width is-flex-wrap-wrap is-align-items-center">
+            <div class="column is-flex is-flex-direction-column mx-2">
+              <p class="is-main">College / Center</p>
+              <div class="select is-flex is-flex-direction-column">
+                <select id="dropdown" name="college" required>
+                  {% if college %}
+                  <option value="{{ college }}">{{ college }}</option>
+                  {% endif %}
+                  <option value="Presidency of the University">Presidency of the University</option>
+                  <option value="College of Education">College of Education</option>
+                  <option value="College of Administration and Economics">College of Administration and Economics</option>
+                  <option value="College of Arts">College of Arts</option>
+                  <option value="College of Veterinary Medicine">College of Veterinary Medicine</option>
+                  <option value="College of Medicine">College of Medicine</option>
+                  <option value="College of Physical Education and Sports Sciences">College of Physical Education and Sports Sciences</option>
+                  <option value="College of Science">College of Science</option>
+                  <option value="College of Law">College of Law</option>
+                  <option value="College of Engineering">College of Engineering</option>
+                  <option value="College of Computer Science and Information Technology">College of Computer Science and Information Technology</option>
+                  <option value="College of Agriculture">College of Agriculture</option>
+                  <option value="College of Education for Women">College of Education for Women</option>
+                  <option value="College of Pharmacy">College of Pharmacy</option>
+                  <option value="College of Nursing">College of Nursing</option>
+                  <option value="College of Dentistry">College of Dentistry</option>
+                  <option value="College of Archaeology">College of Archaeology</option>
+                  <option value="College of Biotechnology">College of Biotechnology</option>
+                  <option value="College of Fine Arts">College of Fine Arts</option>
+                  <option value="All">All</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-flex is-flex-direction-column mx-2">
+              <p class="is-main">Query</p>
+              <button class="button" onclick="staffUrl('{% url 'group' %}')"><i class="bi bi-people" aria-hidden="true"></i></button>
+            </div>
+            {% if request.user.is_superuser %}
+            <div class="column is-flex is-flex-direction-column mx-2">
+              <p class="is-main">Excel</p>
+              <button class="button" onclick="excelUrl('{% url 'excel' %}')"><i class="bi bi-file-earmark-spreadsheet" aria-hidden="true"></i></button>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% else %}
+        <div class="is-flex is-justify-content-center is-align-items-center">
+          <div class="container columns is-full-width is-flex-wrap-wrap is-align-items-center">
+            <div class="column is-one-third is-flex is-flex-direction-column mx-2">
+              <p class="is-main">الكلية أو المركز</p>
+              <div class="select is-flex is-flex-direction-column">
+                <select id="dropdown" name="ar_college" required>
+                  {% if ar_college %}
+                  {% if ar_college == 'All' %}
+                  <option value="All">الكل</option>
+                  {% else %}
+                  <option value="{{ ar_college }}">{{ ar_college }}</option>
+                  {% endif %}
+                  {% endif %}
+                  <option value="رئاسة الجامعة">رئاسة الجامعة</option>
+                  <option value="كلية التربية">كلية التربية</option>
+                  <option value="كلية الأدارة والأقتصاد">كلية الأدارة والأقتصاد</option>
+                  <option value="كلية الأداب">كلية الأداب</option>
+                  <option value="كلية الطب البيطري">كلية الطب البيطري</option>
+                  <option value="كلية الطب">كلية الطب</option>
+                  <option value="كلية التربية البدنية وعلوم الرياضة">كلية التربية البدنية وعلوم الرياضة</option>
+                  <option value="كلية العلوم">كلية العلوم</option>
+                  <option value="كلية القانون">كلية القانون</option>
+                  <option value="كلية الهندسة">كلية الهندسة</option>
+                  <option value="كلية علوم الحاسوب وتكنولوجيا المعلومات">كلية علوم الحاسوب وتكنولوجيا المعلومات</option>
+                  <option value="كلية الزراعة">كلية الزراعة</option>
+                  <option value="كلية التربية للبنات">كلية التربية للبنات</option>
+                  <option value="كلية الصيدلة">كلية الصيدلة</option>
+                  <option value="كلية التمريض">كلية التمريض</option>
+                  <option value="كلية طب الأسنان">كلية طب الأسنان</option>
+                  <option value="كلية الأثار">كلية الأثار</option>
+                  <option value="كلية التقانات الاحيائية">كلية التقانات الاحيائية</option>
+                  <option value="كلية الفنون الجميلة">كلية الفنون الجميلة</option>
+                  <option value="All">الكل</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-flex is-flex-direction-column mx-2">
+              <p class="is-main">عرض</p>
+              <button class="button" onclick="staffUrl('{% url 'group' %}')"><i class="bi bi-people" aria-hidden="true"></i></button>
+            </div>
+            {% if request.user.is_superuser %}
+            <div class="column is-flex is-flex-direction-column mx-2">
+              <p class="is-main">أكسيل</p>
+              <button class="button" onclick="excelUrl('{% url 'excel' %}')"><i class="bi bi-file-earmark-spreadsheet" aria-hidden="true"></i></button>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      </form>
+    </div>
+
+    {% include 'includes/search.html' %}
+
+    {% if bios %}
+
+    <div class="box is-section mx-6 my-3">
+      <div class="is-flex is-justify-content-end mb-4">
+        {% if college %}
+        <p class="is-main is-font-md p-3 ">{{ college }} | {{ academic_title }}</p>
+        {% elif ar_college %}
+        <p class="is-main is-font-md p-3 ">{% if ar_college == 'All' %}الكل{% else %}{{ ar_college }}{% endif %} | {% if ar_academic_title == 'All' %}الكل{% else %}{{ ar_academic_title }}{% endif %}</p>
+        {% else %}
+        <p class="is-main is-font-md p-3 ">` {{ query }} `</p>
+        {% endif %}
+        <i class="bi bi-people-fill is-main-icon link-trigger-edit is-clickable"></i>
+      </div>
+
+    {% include 'includes/cards.html' %}
+
+    </div>
+
+    {% else %}
+
+    <div class="box is-section mx-6 my-3">
+      {% if LANGUAGE_CODE == 'en' %}
+      <h1 class="is-main is-font-md p-3">No Results</h1>
+    {% else %}
+      <h1 class="is-main is-font-md  p-3">لا توجد نتائج</h1>
+    {% endif %}
+    </div>
+
+    {% endif %}
+
+    {% include 'includes/footer.html' %}
+
+  </body>
+  <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</html>

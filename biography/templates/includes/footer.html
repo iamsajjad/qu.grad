@@ -1,0 +1,38 @@
+{% load i18n %}
+{% load static %}
+<section class="is-main-bg p-4 footer">
+  <div class="columns">
+    <div class="column is-white is-four-fifths has-text-left">
+      Technical Support <i class="bi bi-envelope-at-fill is-white"></i> : <a class="is-white" href="mailto:cc@qu.edu.iq">cc@qu.edu.iq</a>
+    </div>
+  </div>
+
+  {% if LANGUAGE_CODE == 'en' %}
+  <div class="copyright is-white has-text-centered">
+    Copyright &copy<script>document.write(new Date().getFullYear())</script> All Rights Reserved<br>
+    <a href="https://cc.qu.edu.iq" target="_blank"><strong class="is-white">University of Qadisiyah | Computer Center</strong></a><br>
+    <strong>
+      <span>
+        <a href="mailto:sajjad.aldalwachee@gmail.com">
+          <span class="px-1 is-white">Sajjad alDalwachee</span>
+          <i class="bi bi-envelope-at-fill is-white"></i>
+        </a>
+      </span>
+    </strong>
+  </div>
+  {% else %}
+  <div class="copyright is-white has-text-centered">
+    Copyright &copy<script>document.write(new Date().getFullYear())</script><span class="is-white "> جميع الحقوق محفوظة</span><br>
+    <a href="https://cc.qu.edu.iq" target="_blank"><strong class="is-white ">جامعة القادسية | مركز الحاسبة الألكترونية</strong></a><br>
+    <strong>
+      <span>
+        <a href="mailto:sajjad.aldalwachee@gmail.com">
+          <span class="px-1 is-white ">سجاد الدلوجي</span>
+          <i class="bi bi-envelope-at-fill is-white"></i>
+        </a>
+      </span>
+    </strong>
+  </div>
+  {% endif %}
+  <span class="is-white has-text-centered">version : <strong class="is-white">1.0.0</strong></span>
+</section>

@@ -1,0 +1,22 @@
+{% load i18n %}
+{% load static %}
+{% load switchlang %}
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+  <div class="col-12 d-flex align-items-center justify-content-between">
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="{% url 'homepage' %}" class="logo d-flex align-items-center">
+        {% if LANGUAGE_CODE == 'en' %}
+        <span class="d-lg-block">University of<br>Al-Qadisiyah | Graduates</span>
+        {% else %}
+        <span class="d-lg-block">جامعــــــــــــــــــــــــــــــــــة<br>القادسيـــــــــــــــــــــــــة | الخريجين</span>
+        {% endif %}
+        <img class="mx-2" src="{% static 'assets/icons/quniv.svg' %}" alt="" >
+      </a>
+    </div><!-- End Logo -->
+  </div><!-- End Logo -->
+
+</header><!-- End Header -->

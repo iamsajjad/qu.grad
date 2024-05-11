@@ -1,0 +1,49 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include './includes/head.html' %}
+    <title>UoQ | CV project</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+
+  <body>
+
+    {% include 'includes/header.html' %}
+
+    <div class="box is-section mx-6 my-3">
+      <div class="m-3 p-3" style="border-radius: 10px">
+        <p class="is-size-3 is-title ">{{ post.title }}</p>
+        <p class=""><span class="">{{ post.create_date }}</span> | <span class="tag is-primary">Post Number : {{ post.id }}</span></p>
+        <div class="is-flex is-links-container is-align-items-center justify-content-center is-full-width">
+          <div class="is-right-border"></div>
+          <div  class="is-main " style=" overflow-x: auto;">
+            <p class="is-size-5">{{ post.text }}</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div class="is-flex is-justify-content-space-around is-flex-direction-row is-full-width">
+            <div class="" id="postqrcode"></div>
+          </div>
+        </div>
+        <script type="text/javascript">
+          var enqrcode = new QRCode(document.getElementById("postqrcode"), {
+            text: "https://grad.qu.edu.iq/ar/post/{{ post.id }}",
+            width: 128,
+            height: 128,
+            colorDark : "#408b8a",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+          });
+        </script>
+      </div>
+    </div>
+
+    {% include 'includes/footer.html' %}
+
+  </body>
+  <script src="{% static 'js/main.js' %}"></script>
+</html>
