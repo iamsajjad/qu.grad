@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-ui4gw-59216f(z+1cl=*6n%68fpx&#yk5=xefqyr4gii1j$a4_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ('*', 'localhost', '127.0.0.1', )
+ALLOWED_HOSTS = ('https://grad.qu.edu.iq', 'http://grad.qu.edu.iq', 'grad.qu.edu.iq', 'localhost', '127.0.0.1', '*',)
 
 # allowed users from specific ORGs
 IS_ORG_EMAIL = lambda ue : any(True for ve in ('@qu.edu.iq',) if not ue.endswith(ve))
