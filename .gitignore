@@ -61,4 +61,5 @@ dockerdata/
 
 # user uploaded images
 /biography/media/user/images/**/*
+/biography/media/posts/**/*
 

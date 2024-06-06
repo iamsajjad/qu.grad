@@ -22,21 +22,52 @@
       <h1 class="is-main  is-font-md p-3">أنشاء منشور جديد</h1>
       {% endif %}
       <div class="is-flex is-justify-content-start">
-        <form class="is-flex is-flex-direction-column m-3 is-full-width" action="{% url 'post' %}" method="post"> {% csrf_token %}
-          <input class="input   my-1" type="text" name="title" type="text" autofocus
+        <form class="is-flex is-flex-direction-column m-3 is-full-width" action="{% url 'post' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+          <input class="input my-1" type="text" name="title" type="text" autofocus
             {% if LANGUAGE_CODE == 'en' %}
             placeholder="Post Title Here"
             {% else %}
             placeholder="عنوان المنشور هنا"
             {% endif %}
           />
-          <textarea class="textarea" name="text"
+          <input class="input my-3" type="text" name="url" type="text"
+            {% if LANGUAGE_CODE == 'en' %}
+            placeholder="URL here if needed"
+            {% else %}
+            placeholder="أدخل الرابط هنا اذا توفر"
+            {% endif %}
+          />
+
+          <textarea class="textarea my-3" name="text"
             {% if LANGUAGE_CODE == 'en' %}
             placeholder="Post Text Here"
             {% else %}
             placeholder="نص المنشور هنا"
             {% endif %}
-            ></textarea>
+            >
+          </textarea>
+
+          <div class="container columns is-full-width is-flex-wrap-wrap">
+            <div class="column is-full-width is-flex is-flex-direction-column is-align-items-center">
+              <div class="file has-name">
+                <label class="file-label">
+                  <input class="file-input" id="image" name="image" type="file" onchange="fileSize(3);" />
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                      Personal Photo…
+                    </span>
+                  </span>
+                  <span class="file-name">
+                    upload personal photo
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+
           <input class="button my-3" type="submit"
             {% if LANGUAGE_CODE == 'en' %}
             value="Post"
@@ -60,35 +91,41 @@
         {% else %}
         <a target="_blank" href="/ar/post/{{ post.id }}" style="direction:rtl">
         {% endif %}
-            <div class="m-3 p-3" style="border-radius: 10px">
-              <p class="is-size-3 is-title ">{{ post.title }}</p>
-              <p class=""><span class="">{{ post.create_date }}</span> | <span class="tag is-primary">Post Number : {{ post.id }}</span></p>
-              <div class="is-flex is-links-container is-align-items-center justify-content-center is-full-width">
-                <div class="is-right-border"></div>
-                <div  class="is-main " style=" overflow-x: auto;">
-                  <p class="is-size-5">{{ post.text }}</p>
-                </div>
+          <div class="m-3 p-3" style="border-radius: 10px">
+            <p class="is-size-3 is-title ">{{ post.title }}</p>
+            <p class=""><span class="">{{ post.create_date }}</span> | <span class="tag is-primary">Post Number : {{ post.id }}</span></p>
+            <div class="is-flex is-links-container is-align-items-center justify-content-center is-full-width">
+              <div class="is-right-border"></div>
+              <div  class="is-main " style=" overflow-x: auto;">
+                <p class="is-size-5">{{ post.text }}</p>
+                {% if post.url %}
+                  <a target="_blank" href="{{ post.url }}" style="">{{ post.url }}</a>
+                {% endif %}
               </div>
             </div>
-          </a>
-
-          <div>
-            <div>
-              <div class="is-flex is-justify-content-space-around is-flex-direction-row is-full-width">
-                <div class="" id="postqrcode"></div>
-              </div>
-            </div>
-            <script type="text/javascript">
-              var enqrcode = new QRCode(document.getElementById("postqrcode"), {
-                text: "https://grad.qu.edu.iq/ar/post/{{ post.id }}",
-                width: 128,
-                height: 128,
-                colorDark : "#408b8a",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-              });
-            </script>
+            {% if post.image %}
+              <img src="{{ post.image.url }}" alt="Post Image" class="img-thumbnail rounded" height="500px" width="500px">
+            {% endif %}
           </div>
+        </a>
+
+        <div>
+          <div>
+            <div class="is-flex is-justify-content-space-around is-flex-direction-row is-full-width">
+              <div class="" id="postqrcode-{{ post.id}}"></div>
+            </div>
+          </div>
+          <script type="text/javascript">
+            var enqrcode = new QRCode(document.getElementById("postqrcode-{{ post.id }}"), {
+              text: "https://grad.qu.edu.iq/ar/post/{{ post.id }}",
+              width: 128,
+              height: 128,
+              colorDark : "#408b8a",
+              colorLight : "#ffffff",
+              correctLevel : QRCode.CorrectLevel.H
+            });
+          </script>
+        </div>
       </div>
       {% endfor %}
 

@@ -12,7 +12,7 @@ def post(request):
 
     if request.method == 'POST':
 
-        post = PostForm(request.POST)
+        post = PostForm(request.POST, request.FILES)
 
         if post.is_valid():
 
